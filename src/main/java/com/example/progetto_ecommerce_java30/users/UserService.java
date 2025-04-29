@@ -20,9 +20,7 @@ public class UserService {
     }
 
     public Optional<UserEntity> getUserById(Long id){
-        Optional<UserEntity> foundUser = userRepository.findById(id);
-
-        return foundUser;
+         return userRepository.findById(id);
     }
 
     public void deleteUserById(Long id){
