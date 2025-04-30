@@ -1,12 +1,13 @@
-package com.example.progetto_ecommerce_java30.order;
+package com.example.progetto_ecommerce_java30.entity;
 
+import com.example.progetto_ecommerce_java30.entity.enumerated.OrderShippingEnum;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 //Ordine : id, numeroOrdine, indirizzo, consegnato/inConsegna(Enum), dataPagameto.
 @Entity
-public class Order {
+public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +18,9 @@ public class Order {
     OrderShippingEnum orderShipping;
     private LocalDate paymentDate;
 
-    private Order() {}
+    private OrderEntity() {}
 
-    public Order(Long id, Long orderNumber, String address, OrderShippingEnum orderShipping, LocalDate paymentDate) {
+    public OrderEntity(Long id, Long orderNumber, String address, OrderShippingEnum orderShipping, LocalDate paymentDate) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.address = address;

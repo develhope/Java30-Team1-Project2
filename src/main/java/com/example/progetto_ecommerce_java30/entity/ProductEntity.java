@@ -1,5 +1,7 @@
-package com.example.progetto_ecommerce_java30.products;
+package com.example.progetto_ecommerce_java30.entity;
 
+import com.example.progetto_ecommerce_java30.entity.enumerated.ProductCategory;
+import com.example.progetto_ecommerce_java30.entity.enumerated.ProductCondition;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

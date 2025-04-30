@@ -1,5 +1,7 @@
-package com.example.progetto_ecommerce_java30.products;
+package com.example.progetto_ecommerce_java30.controller;
 
+import com.example.progetto_ecommerce_java30.entity.ProductEntity;
+import com.example.progetto_ecommerce_java30.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

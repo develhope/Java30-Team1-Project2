@@ -1,4 +1,4 @@
-package com.example.progetto_ecommerce_java30.shoppingCart;
+package com.example.progetto_ecommerce_java30.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 // Carrello: id, nome, prezzoFinale(da valuatare), dataCreazione(da valutare).
 
 @Entity
-public class ShoppingCart {
+public class ShoppingCartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,9 +17,9 @@ public class ShoppingCart {
     private Integer finalPrice;
     private LocalDate creationDate;
 
-    private ShoppingCart() {}
+    private ShoppingCartEntity() {}
 
-    public ShoppingCart(Long id, String nameCart, Integer finalPrice, LocalDate creationDate) {
+    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate) {
         this.id = id;
         this.nameCart = nameCart;
         this.finalPrice = finalPrice;

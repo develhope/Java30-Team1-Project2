@@ -1,5 +1,7 @@
-package com.example.progetto_ecommerce_java30.users;
+package com.example.progetto_ecommerce_java30.service;
 
+import com.example.progetto_ecommerce_java30.entity.UserEntity;
+import com.example.progetto_ecommerce_java30.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.progetto_ecommerce_java30.users;
+package com.example.progetto_ecommerce_java30.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
