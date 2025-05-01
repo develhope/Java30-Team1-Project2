@@ -36,10 +36,17 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable Long id){
-        userService.deleteUserById(id);
+    //wildcard generica di Java, Il punto interrogativo rappresenta un tipo generico sconosciuto e accetta più tipi di oggetti.
+    //la utilizzo per dare un body alla ResponseEntity (badRequest)
+    public ResponseEntity<?> deleteUserById(@PathVariable Long id){
+        Optional<UserEntity> userToDeactivate = userService.deleteUserById(id);
 
-        return ResponseEntity.noContent().build();
+        if(userToDeactivate.isPresent()){
+            return ResponseEntity.ok(userToDeactivate.get());
+        }
+
+        return ResponseEntity.badRequest().body("L'id inserito non è valido.");
+
     }
 
 }

@@ -25,8 +25,16 @@ public class UserService {
          return userRepository.findById(id);
     }
 
-    public void deleteUserById(Long id){
-        userRepository.deleteById(id);
+    public Optional<UserEntity> deleteUserById(Long id){
+        if(userRepository.existsById(id)){
+            UserEntity userToDeactivate = userRepository.findById(id).get();
+
+            userToDeactivate.setActive(false);
+
+            return Optional.of(userRepository.save(userToDeactivate));
+        }
+
+        return Optional.empty();
     }
 
 }
