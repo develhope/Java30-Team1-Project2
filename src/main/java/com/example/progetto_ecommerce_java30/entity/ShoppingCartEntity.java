@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 // Carrello: id, nome, prezzoFinale(da valuatare), dataCreazione(da valutare).
 
-@Entity
+@Entity(name = "shopping_cart")
 public class ShoppingCartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

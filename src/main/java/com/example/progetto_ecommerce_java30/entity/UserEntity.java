@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "user")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

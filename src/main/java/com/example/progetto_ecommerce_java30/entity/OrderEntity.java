@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 //Ordine : id, numeroOrdine, indirizzo, consegnato/inConsegna(Enum), dataPagameto.
-@Entity
+@Entity(name = "shopping_order")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
