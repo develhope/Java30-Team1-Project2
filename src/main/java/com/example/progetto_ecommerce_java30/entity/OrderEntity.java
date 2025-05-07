@@ -15,7 +15,7 @@ public class OrderEntity {
     private String address;
 
     @Enumerated(EnumType.STRING)
-    OrderShippingEnum orderShipping;
+    private OrderShippingEnum orderShipping;
     private LocalDate paymentDate;
 
     private OrderEntity() {}
