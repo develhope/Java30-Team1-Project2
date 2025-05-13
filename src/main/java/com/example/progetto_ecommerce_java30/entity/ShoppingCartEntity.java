@@ -1,11 +1,9 @@
 package com.example.progetto_ecommerce_java30.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 // Carrello: id, nome, prezzoFinale(da valuatare), dataCreazione(da valutare).
 
 @Entity(name = "shopping_cart")
@@ -17,13 +15,17 @@ public class ShoppingCartEntity {
     private Integer finalPrice;
     private LocalDate creationDate;
 
+    @ManyToMany
+    private List<ProductEntity> products;
+
     private ShoppingCartEntity() {}
 
-    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate) {
+    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate, List<ProductEntity> products) {
         this.id = id;
         this.nameCart = nameCart;
         this.finalPrice = finalPrice;
         this.creationDate = creationDate;
+        this.products = products;
     }
 
     public Long getId() {
@@ -56,5 +58,13 @@ public class ShoppingCartEntity {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductEntity> products) {
+        this.products = products;
     }
 }
