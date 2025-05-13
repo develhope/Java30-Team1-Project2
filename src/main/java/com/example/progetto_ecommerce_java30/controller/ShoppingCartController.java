@@ -1,9 +1,14 @@
 package com.example.progetto_ecommerce_java30.controller;
 
+import com.example.progetto_ecommerce_java30.entity.ProductEntity;
+import com.example.progetto_ecommerce_java30.entity.ShoppingCartEntity;
 import com.example.progetto_ecommerce_java30.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/shopping-cart")
@@ -11,4 +16,30 @@ public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @GetMapping
+    public List<ShoppingCartEntity> allShoppingCart(){
+        return  shoppingCartService.getAllShoppingCart();
+    }
+
+    @PostMapping
+    public ResponseEntity<ShoppingCartEntity> addShoppingCart(@RequestBody ShoppingCartEntity newShoppingCart){
+        return ResponseEntity.ok(shoppingCartService.addShoppingCart(newShoppingCart));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ShoppingCartEntity> shoppingCartById(@PathVariable Long id){
+        Optional<ShoppingCartEntity> foundShoppingCart = shoppingCartService.shoppingCartById(id);
+
+        return foundShoppingCart
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteShoppingCartById(@PathVariable Long id){
+        shoppingCartService.deleteShoppingCartById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
