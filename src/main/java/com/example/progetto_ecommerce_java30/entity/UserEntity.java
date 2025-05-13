@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "user")
 public class UserEntity {
@@ -24,6 +25,9 @@ public class UserEntity {
 
     @OneToOne
     private ShoppingCartEntity shoppingCart;
+
+    @OneToMany(mappedBy = "user")
+    private List<OrderEntity> orders;
 
     private UserEntity(){}
 
