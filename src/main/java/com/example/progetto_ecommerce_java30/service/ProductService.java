@@ -13,20 +13,27 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<ProductEntity> getAllProducts(){
+    public List<ProductEntity> getAllProducts() {
         return productRepository.findAll();
     }
 
-    public ProductEntity addProduct(ProductEntity newProduct){
+    public ProductEntity addProduct(ProductEntity newProduct) {
         return productRepository.save(newProduct);
     }
 
-    public Optional<ProductEntity> productById(Long id){
+    public Optional<ProductEntity> productById(Long id) {
         return productRepository.findById(id);
     }
 
-    public void deleteProductById(Long id){
-        productRepository.deleteById(id);
+    public Optional<ProductEntity> deleteProductById(Long id) {
+        if (productRepository.existsById(id)) {
+            ProductEntity product = productRepository.findById(id).get();
+            product.setActive(false);
+
+            return Optional.of(productRepository.save(product));
+        }
+
+        return Optional.empty();
     }
 
 }
