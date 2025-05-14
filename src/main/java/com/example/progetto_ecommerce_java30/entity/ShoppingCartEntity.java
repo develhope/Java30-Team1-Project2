@@ -15,7 +15,17 @@ public class ShoppingCartEntity {
     private Integer finalPrice;
     private LocalDate creationDate;
 
-    @ManyToMany
+    @OneToOne(mappedBy = "shopping_cart")
+    private UserEntity user;
+
+    @ManyToMany(
+            fetch   = FetchType.LAZY,
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE }
+    )
+    @JoinTable(name="shopping_cart_products",
+            joinColumns = @JoinColumn(name="shopping_cart_id"),
+            inverseJoinColumns = @JoinColumn(name="product_id")
+    )
     private List<ProductEntity> products;
 
     private ShoppingCartEntity() {}
