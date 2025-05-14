@@ -17,16 +17,20 @@ public class ShoppingCartEntity {
 
     @ManyToMany
     private List<ProductEntity> products;
+    @OneToOne
+    private OrderEntity shopping_order;
 
     private ShoppingCartEntity() {}
 
-    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate, List<ProductEntity> products) {
+    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate, List<ProductEntity> products,
+                              OrderEntity shopping_order) {
         this.id = id;
         this.nameCart = nameCart;
         this.finalPrice = finalPrice;
         this.creationDate = creationDate;
         this.products = products;
-    }
+        this.shopping_order = shopping_order;
+        }
 
     public Long getId() {
         return id;
@@ -66,5 +70,13 @@ public class ShoppingCartEntity {
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+    public OrderEntity getShopping_order() {
+        return shopping_order;
+    }
+
+    public void setShopping_order(OrderEntity shopping_order) {
+        this.shopping_order = shopping_order;
     }
 }
