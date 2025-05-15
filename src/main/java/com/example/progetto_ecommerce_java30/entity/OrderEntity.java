@@ -1,6 +1,7 @@
 package com.example.progetto_ecommerce_java30.entity;
 
 import com.example.progetto_ecommerce_java30.entity.enumerated.OrderShippingEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -17,19 +18,19 @@ public class OrderEntity {
     private OrderShippingEnum orderShipping;
     private LocalDate paymentDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @OneToOne
+    private ShoppingCartEntity shoppingCart;
 
     private OrderEntity() {}
 
-    public OrderEntity(Long id, Long orderNumber, String address, OrderShippingEnum orderShipping, LocalDate paymentDate, UserEntity user) {
+    public OrderEntity(Long id, Long orderNumber, String address, OrderShippingEnum orderShipping, LocalDate paymentDate,
+                       ShoppingCartEntity shoppingCart) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.address = address;
         this.orderShipping = orderShipping;
         this.paymentDate = paymentDate;
-        this.user = user;
+        this.shoppingCart = shoppingCart;
     }
 
     public Long getId() {
@@ -60,6 +61,10 @@ public class OrderEntity {
         return orderShipping;
     }
 
+    public void setOrderShipping(OrderShippingEnum orderShipping) {
+        this.orderShipping = orderShipping;
+    }
+
     public LocalDate getPaymentDate() {
         return paymentDate;
     }
@@ -68,11 +73,12 @@ public class OrderEntity {
         this.paymentDate = paymentDate;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public ShoppingCartEntity getShoppingCart() {
+        return shoppingCart;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setShoppingCart(ShoppingCartEntity shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
+
 }

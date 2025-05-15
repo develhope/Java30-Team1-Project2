@@ -1,5 +1,6 @@
 package com.example.progetto_ecommerce_java30.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
@@ -27,7 +28,7 @@ public class UserEntity {
     @JoinColumn(name="shopping_cart_id")
     private ShoppingCartEntity shopping_cart;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany
     private List<OrderEntity> orders;
 
     private UserEntity(){}

@@ -14,9 +14,6 @@ public class ShoppingCartEntity {
     private Integer finalPrice;
     private LocalDate creationDate;
 
-    @OneToOne(mappedBy = "shopping_cart")
-    private UserEntity user;
-
     @ManyToMany(
             fetch   = FetchType.LAZY,
             cascade = { CascadeType.PERSIST, CascadeType.MERGE }
@@ -27,19 +24,14 @@ public class ShoppingCartEntity {
     )
     private List<ProductEntity> products;
 
-    @OneToOne
-    private OrderEntity shopping_order;
-
     private ShoppingCartEntity() {}
 
-    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate, List<ProductEntity> products,
-                              OrderEntity shopping_order) {
+    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate, List<ProductEntity> products) {
         this.id = id;
         this.nameCart = nameCart;
         this.finalPrice = finalPrice;
         this.creationDate = creationDate;
         this.products = products;
-        this.shopping_order = shopping_order;
         }
 
     public Long getId() {
@@ -82,11 +74,4 @@ public class ShoppingCartEntity {
         this.products = products;
     }
 
-    public OrderEntity getShopping_order() {
-        return shopping_order;
-    }
-
-    public void setShopping_order(OrderEntity shopping_order) {
-        this.shopping_order = shopping_order;
-    }
 }
