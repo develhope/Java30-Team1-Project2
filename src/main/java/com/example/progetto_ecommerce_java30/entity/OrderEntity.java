@@ -4,9 +4,7 @@ import com.example.progetto_ecommerce_java30.entity.enumerated.OrderShippingEnum
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
-//Ordine : id, numeroOrdine, indirizzo, consegnato/inConsegna(Enum), dataPagameto.
 @Entity(name = "shopping_order")
 public class OrderEntity {
     @Id

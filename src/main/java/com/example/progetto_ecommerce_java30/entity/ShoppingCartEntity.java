@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
-// Carrello: id, nome, prezzoFinale(da valuatare), dataCreazione(da valutare).
 
 @Entity(name = "shopping_cart")
 public class ShoppingCartEntity {
