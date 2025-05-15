@@ -25,12 +25,13 @@ public class OrderEntity {
 
     private OrderEntity() {}
 
-    public OrderEntity(Long id, Long orderNumber, String address, OrderShippingEnum orderShipping, LocalDate paymentDate) {
+    public OrderEntity(Long id, Long orderNumber, String address, OrderShippingEnum orderShipping, LocalDate paymentDate, UserEntity user) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.address = address;
         this.orderShipping = orderShipping;
         this.paymentDate = paymentDate;
+        this.user = user;
     }
 
     public Long getId() {
@@ -67,5 +68,13 @@ public class OrderEntity {
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }
