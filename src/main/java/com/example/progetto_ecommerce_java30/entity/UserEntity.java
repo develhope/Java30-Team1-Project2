@@ -32,13 +32,14 @@ public class UserEntity {
 
     private UserEntity(){}
 
-    public UserEntity(String name, String surname, String email, LocalDate birthDate, LocalDate registrationDate, boolean isActive) {
+    public UserEntity(String name, String surname, String email, LocalDate birthDate, LocalDate registrationDate, boolean isActive, List<OrderEntity> orders) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
         this.isActive = isActive;
+        this.orders = orders;
     }
 
     public Long getId() {
@@ -95,5 +96,13 @@ public class UserEntity {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
     }
 }
