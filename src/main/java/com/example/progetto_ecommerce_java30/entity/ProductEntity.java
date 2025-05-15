@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "product")
 public class ProductEntity {
@@ -24,6 +25,9 @@ public class ProductEntity {
 
     private BigDecimal price;
     private LocalDate insertDate;
+
+    @ManyToMany(mappedBy="products")
+    private List<ShoppingCartEntity> shoppingCarts;
 
     private boolean isActive = true;
 

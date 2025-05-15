@@ -24,7 +24,8 @@ public class UserEntity {
     private boolean isActive = true;
 
     @OneToOne
-    private ShoppingCartEntity shoppingCart;
+    @JoinColumn(name="shopping_cart_id")
+    private ShoppingCartEntity shopping_cart;
 
     @OneToMany(mappedBy = "user")
     private List<OrderEntity> orders;
