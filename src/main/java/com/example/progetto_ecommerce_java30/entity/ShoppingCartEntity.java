@@ -27,6 +27,7 @@ public class ShoppingCartEntity {
             inverseJoinColumns = @JoinColumn(name="product_id")
     )
     private List<ProductEntity> products;
+
     @OneToOne
     private OrderEntity shopping_order;
 
