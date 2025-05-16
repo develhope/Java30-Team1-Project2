@@ -1,8 +1,10 @@
 package com.example.progetto_ecommerce_java30.controller;
 
+import com.example.progetto_ecommerce_java30.component.ProductPopulator;
 import com.example.progetto_ecommerce_java30.entity.ProductEntity;
 import com.example.progetto_ecommerce_java30.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductPopulator productPopulator;
 
     @GetMapping
     public List<ProductEntity> allProducts() {
@@ -42,5 +47,11 @@ public class ProductController {
         return product
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    @PostMapping("/populate")
+    @ResponseStatus(HttpStatus.OK)
+    public void addSampleUsers() {
+        productPopulator.populate();
     }
 }
