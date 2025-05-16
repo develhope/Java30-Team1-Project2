@@ -74,4 +74,12 @@ public class ShoppingCartEntity {
         this.products = products;
     }
 
+    public void addProduct(ProductEntity addProd){
+        this.products.add(addProd);
+    }
+
+    public void removeProduct(ProductEntity removeProd){
+        this.products.remove(removeProd);
+    }
+
 }
