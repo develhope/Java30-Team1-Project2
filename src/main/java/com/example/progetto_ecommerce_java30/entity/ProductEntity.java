@@ -34,7 +34,9 @@ public class ProductEntity {
     private ProductEntity() {
     }
 
-    public ProductEntity(String name, String description, ProductCategory category, ProductCondition condition, BigDecimal price, LocalDate insertDate, boolean isActive) {
+    public ProductEntity(String name, String description, ProductCategory category,
+                         ProductCondition condition, BigDecimal price, LocalDate insertDate,
+                         boolean isActive, List<ShoppingCartEntity> shoppingCarts) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -42,6 +44,7 @@ public class ProductEntity {
         this.price = price;
         this.insertDate = insertDate;
         this.isActive = isActive;
+        this.shoppingCarts = shoppingCarts;
     }
 
     public Long getId() {
@@ -106,6 +109,14 @@ public class ProductEntity {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public List<ShoppingCartEntity> getShoppingCarts() {
+        return shoppingCarts;
+    }
+
+    public void setShoppingCarts(List<ShoppingCartEntity> shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
     }
 
     public void addShoppingCarts(ShoppingCartEntity shoppingCart) {
