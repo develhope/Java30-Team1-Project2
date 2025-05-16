@@ -29,6 +29,7 @@ public class UserEntity {
     private ShoppingCartEntity shopping_cart;
 
     @OneToMany
+    @JoinColumn(name = "shopping_order_id")
     private List<OrderEntity> orders;
 
     private UserEntity() {

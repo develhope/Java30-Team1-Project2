@@ -2,6 +2,7 @@ package com.example.progetto_ecommerce_java30.entity;
 
 import com.example.progetto_ecommerce_java30.entity.enumerated.ProductCategory;
 import com.example.progetto_ecommerce_java30.entity.enumerated.ProductCondition;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -26,9 +27,6 @@ public class ProductEntity {
     private BigDecimal price;
     private LocalDate insertDate;
 
-    @ManyToMany(mappedBy = "products")
-    private List<ShoppingCartEntity> shoppingCarts;
-
     private boolean isActive = true;
 
     private ProductEntity() {
@@ -36,7 +34,7 @@ public class ProductEntity {
 
     public ProductEntity(String name, String description, ProductCategory category,
                          ProductCondition condition, BigDecimal price, LocalDate insertDate,
-                         boolean isActive, List<ShoppingCartEntity> shoppingCarts) {
+                         boolean isActive) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -44,7 +42,6 @@ public class ProductEntity {
         this.price = price;
         this.insertDate = insertDate;
         this.isActive = isActive;
-        this.shoppingCarts = shoppingCarts;
     }
 
     public Long getId() {
@@ -109,21 +106,5 @@ public class ProductEntity {
 
     public void setActive(boolean active) {
         isActive = active;
-    }
-
-    public List<ShoppingCartEntity> getShoppingCarts() {
-        return shoppingCarts;
-    }
-
-    public void setShoppingCarts(List<ShoppingCartEntity> shoppingCarts) {
-        this.shoppingCarts = shoppingCarts;
-    }
-
-    public void addShoppingCarts(ShoppingCartEntity shoppingCart) {
-        this.shoppingCarts.add(shoppingCart);
-    }
-
-    public void deleteShoppingCarts(ShoppingCartEntity shoppingCart) {
-        this.shoppingCarts.remove(shoppingCart);
     }
 }
