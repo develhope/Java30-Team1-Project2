@@ -26,12 +26,13 @@ public class ProductEntity {
     private BigDecimal price;
     private LocalDate insertDate;
 
-    @ManyToMany(mappedBy="products")
+    @ManyToMany(mappedBy = "products")
     private List<ShoppingCartEntity> shoppingCarts;
 
     private boolean isActive = true;
 
-    private ProductEntity(){}
+    private ProductEntity() {
+    }
 
     public ProductEntity(String name, String description, ProductCategory category, ProductCondition condition, BigDecimal price, LocalDate insertDate, boolean isActive) {
         this.name = name;
@@ -105,5 +106,13 @@ public class ProductEntity {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public void addShoppingCarts(ShoppingCartEntity shoppingCart) {
+        this.shoppingCarts.add(shoppingCart);
+    }
+
+    public void deleteShoppingCarts(ShoppingCartEntity shoppingCart) {
+        this.shoppingCarts.remove(shoppingCart);
     }
 }
