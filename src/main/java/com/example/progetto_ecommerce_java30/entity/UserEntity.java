@@ -25,13 +25,14 @@ public class UserEntity {
     private boolean isActive = true;
 
     @OneToOne
-    @JoinColumn(name="shopping_cart_id")
+    @JoinColumn(name = "shopping_cart_id")
     private ShoppingCartEntity shopping_cart;
 
     @OneToMany
     private List<OrderEntity> orders;
 
-    private UserEntity(){}
+    private UserEntity() {
+    }
 
     public UserEntity(String name, String surname, String email, LocalDate birthDate, LocalDate registrationDate, boolean isActive, List<OrderEntity> orders) {
         this.name = name;
@@ -105,5 +106,13 @@ public class UserEntity {
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
+    }
+
+    public void addOrders(OrderEntity order) {
+        this.orders.add(order);
+    }
+
+    public void removeOrders(OrderEntity order) {
+        this.orders.remove(order);
     }
 }
