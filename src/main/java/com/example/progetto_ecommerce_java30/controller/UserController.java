@@ -41,6 +41,14 @@ public class UserController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserEntity> updateUserById(@PathVariable Long id, @RequestBody UserEntity userToUpdate){
+        Optional<UserEntity> userUpdated = userService.updateById(id, userToUpdate);
+
+        return userUpdated.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     //wildcard generica di Java, Il punto interrogativo rappresenta un tipo generico sconosciuto e accetta più tipi di oggetti.
     //la utilizzo per dare un body alla ResponseEntity (badRequest)

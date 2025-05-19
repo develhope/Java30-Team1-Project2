@@ -25,6 +25,14 @@ public class UserService {
          return userRepository.findById(id);
     }
 
+    public Optional<UserEntity> updateById(Long id, UserEntity userToUpdate){
+        if(userRepository.existsById(id)){
+            userToUpdate.setId(id);
+            return Optional.of(userRepository.save(userToUpdate));
+        }
+        return Optional.empty();
+    }
+
     public Optional<UserEntity> deleteUserById(Long id){
         if(userRepository.existsById(id)){
             UserEntity userToDeactivate = userRepository.findById(id).get();
