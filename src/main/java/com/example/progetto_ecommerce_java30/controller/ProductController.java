@@ -54,4 +54,18 @@ public class ProductController {
     public void addSampleUsers() {
         productPopulator.populate();
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ProductEntity> updateProduct(@PathVariable Long id, @RequestBody ProductEntity product) {
+        if (id < 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Optional<ProductEntity> productUpdate = productService.updateProduct(id, product);
+        if (productUpdate.isPresent()) {
+            return ResponseEntity.ok(productUpdate.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

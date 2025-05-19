@@ -36,4 +36,12 @@ public class ProductService {
         return Optional.empty();
     }
 
+    public Optional<ProductEntity> updateProduct(Long id, ProductEntity product){
+        if(!productRepository.existsById(id)){
+            return Optional.empty();
+        }
+
+        product.setId(id);
+        return Optional.of(productRepository.save(product));
+    }
 }
