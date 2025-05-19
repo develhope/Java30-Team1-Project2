@@ -1,6 +1,7 @@
 package com.example.progetto_ecommerce_java30.service;
 
 import com.example.progetto_ecommerce_java30.entity.OrderEntity;
+import com.example.progetto_ecommerce_java30.entity.ProductEntity;
 import com.example.progetto_ecommerce_java30.entity.UserEntity;
 import com.example.progetto_ecommerce_java30.repository.OrderRepository;
 import com.example.progetto_ecommerce_java30.repository.UserRepository;
@@ -32,5 +33,14 @@ public class OrderService {
 
     public void deleteOrderById(Long id){
         orderRepository.deleteById(id);
+    }
+
+    public Optional<OrderEntity> updateOrder(Long id, OrderEntity order){
+        if(!orderRepository.existsById(id)){
+            return Optional.empty();
+        }
+
+        order.setId(id);
+        return Optional.of(orderRepository.save(order));
     }
 }
