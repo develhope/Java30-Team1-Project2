@@ -1,8 +1,6 @@
 package com.example.progetto_ecommerce_java30.controller;
 
 import com.example.progetto_ecommerce_java30.entity.OrderEntity;
-import com.example.progetto_ecommerce_java30.entity.ProductEntity;
-import com.example.progetto_ecommerce_java30.entity.ShoppingCartEntity;
 import com.example.progetto_ecommerce_java30.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
