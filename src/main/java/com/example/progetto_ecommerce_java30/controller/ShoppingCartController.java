@@ -37,6 +37,14 @@ public class ShoppingCartController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ShoppingCartEntity> updateCartById(@PathVariable Long id, ShoppingCartEntity cartToUpdate){
+        Optional<ShoppingCartEntity> updatedCart = shoppingCartService.updateCartById(id, cartToUpdate);
+
+        return updatedCart.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteShoppingCartById(@PathVariable Long id){
         shoppingCartService.deleteShoppingCartById(id);

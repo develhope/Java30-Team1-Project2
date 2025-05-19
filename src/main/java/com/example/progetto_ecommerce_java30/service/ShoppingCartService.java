@@ -26,6 +26,14 @@ public class ShoppingCartService {
         return shoppingCartRepository.findById(id);
     }
 
+    public Optional<ShoppingCartEntity> updateCartById(Long id, ShoppingCartEntity cartToUpdate){
+        if(shoppingCartRepository.existsById(id)){
+            cartToUpdate.setId(id);
+            return Optional.of(shoppingCartRepository.save(cartToUpdate));
+        }
+        return Optional.empty();
+    }
+
     public void deleteShoppingCartById(Long id){
         shoppingCartRepository.deleteById(id);
     }
