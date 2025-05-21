@@ -46,8 +46,7 @@ public class ProductPopulator {
             ProductCondition condition = ProductCondition.values()[random.nextInt(ProductCondition.values().length)];
 
             // Generazione di un prezzo compreso tra 10 e 1000, con due decimali
-            BigDecimal price = BigDecimal.valueOf(10 + random.nextDouble() * 990)
-                    .setScale(2, RoundingMode.HALF_UP);
+            Double price = 10 + random.nextDouble() * 990;
 
             // Generazione di una data d'inserimento casuale negli ultimi 1000 giorni
             LocalDate insertDate = LocalDate.now().minusDays(random.nextInt(1000));
