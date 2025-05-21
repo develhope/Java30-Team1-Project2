@@ -12,7 +12,7 @@ public class ShoppingCartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameCart;
-    private Integer finalPrice;
+    private Double finalPrice;
     private LocalDate creationDate;
     @Enumerated
     private ShoppingCartStatus shoppingCartStatus = ShoppingCartStatus.OPENED;
@@ -25,7 +25,7 @@ public class ShoppingCartEntity {
 
     private ShoppingCartEntity() {}
 
-    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate,
+    public ShoppingCartEntity(Long id, String nameCart, Double finalPrice, LocalDate creationDate,
                               List<ProductEntity> products, ShoppingCartStatus shoppingCartStatus) {
         this.id = id;
         this.nameCart = nameCart;
@@ -51,11 +51,11 @@ public class ShoppingCartEntity {
         this.nameCart = nameCart;
     }
 
-    public Integer getFinalPrice() {
+    public Double getFinalPrice() {
         return finalPrice;
     }
 
-    public void setFinalPrice(Integer finalPrice) {
+    public void setFinalPrice(Double finalPrice) {
         this.finalPrice = finalPrice;
     }
 
