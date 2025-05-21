@@ -45,9 +45,17 @@ public class ShoppingCartController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteShoppingCartById(@PathVariable Long id){
         shoppingCartService.deleteShoppingCartById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/add-product/{id}")
+    public ResponseEntity<ShoppingCartEntity> addProduct(@PathVariable Long id, @RequestBody ProductEntity product){
+        Optional<ShoppingCartEntity> addProductToCart = shoppingCartService.addProduct(id, product);
+
+        return addProductToCart.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

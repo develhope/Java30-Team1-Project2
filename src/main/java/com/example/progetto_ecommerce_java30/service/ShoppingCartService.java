@@ -37,4 +37,16 @@ public class ShoppingCartService {
     public void deleteShoppingCartById(Long id){
         shoppingCartRepository.deleteById(id);
     }
+
+    public Optional<ShoppingCartEntity> addProduct(Long cartID, ProductEntity product) {
+        Optional<ShoppingCartEntity> cartEntity = shoppingCartRepository.findById(cartID);
+
+        if (cartEntity.isPresent()) {
+            cartEntity.get().addProduct(product);
+            ShoppingCartEntity savedEntity = shoppingCartRepository.save(cartEntity.get());
+            return Optional.of(savedEntity);
+        }
+         return Optional.empty();
+    }
+
 }
