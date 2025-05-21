@@ -1,5 +1,6 @@
 package com.example.progetto_ecommerce_java30.entity;
 
+import com.example.progetto_ecommerce_java30.entity.enumerated.ShoppingCartStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,6 +14,8 @@ public class ShoppingCartEntity {
     private String nameCart;
     private Integer finalPrice;
     private LocalDate creationDate;
+    @Enumerated
+    private ShoppingCartStatus shoppingCartStatus = ShoppingCartStatus.OPENED;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="shopping_cart_products",
@@ -22,12 +25,14 @@ public class ShoppingCartEntity {
 
     private ShoppingCartEntity() {}
 
-    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate, List<ProductEntity> products) {
+    public ShoppingCartEntity(Long id, String nameCart, Integer finalPrice, LocalDate creationDate,
+                              List<ProductEntity> products, ShoppingCartStatus shoppingCartStatus) {
         this.id = id;
         this.nameCart = nameCart;
         this.finalPrice = finalPrice;
         this.creationDate = creationDate;
         this.products = products;
+        this.shoppingCartStatus = shoppingCartStatus;
         }
 
     public Long getId() {
@@ -78,4 +83,11 @@ public class ShoppingCartEntity {
         this.products.remove(removeProd);
     }
 
+    public ShoppingCartStatus getShoppingCartStatus() {
+        return shoppingCartStatus;
+    }
+
+    public void setShoppingCartStatus(ShoppingCartStatus shoppingCartStatus) {
+        this.shoppingCartStatus = shoppingCartStatus;
+    }
 }
