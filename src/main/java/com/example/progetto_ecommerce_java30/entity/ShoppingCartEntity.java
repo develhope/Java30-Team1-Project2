@@ -25,15 +25,15 @@ public class ShoppingCartEntity {
 
     private ShoppingCartEntity() {}
 
-    public ShoppingCartEntity(Long id, String nameCart, Double finalPrice, LocalDate creationDate,
+    public ShoppingCartEntity(Long id, String nameCart, LocalDate creationDate,
                               List<ProductEntity> products, ShoppingCartStatus shoppingCartStatus) {
         this.id = id;
         this.nameCart = nameCart;
-        this.finalPrice = finalPrice;
+        //this.finalPrice = finalPrice;
         this.creationDate = creationDate;
         this.products = products;
         this.shoppingCartStatus = shoppingCartStatus;
-        }
+    }
 
     public Long getId() {
         return id;
@@ -77,10 +77,18 @@ public class ShoppingCartEntity {
 
     public void addProduct(ProductEntity addProd){
         this.products.add(addProd);
+
+        double v = addProd.getPrice() + finalPrice;
+
+        setFinalPrice(v);
     }
 
-    public void removeProduct(ProductEntity product){
-        this.products.remove(product);
+    public void removeProduct(ProductEntity removeProd){
+        this.products.remove(removeProd);
+
+        double v = finalPrice - removeProd.getPrice();
+
+        setFinalPrice(v);
     }
 
     public ShoppingCartStatus getShoppingCartStatus() {

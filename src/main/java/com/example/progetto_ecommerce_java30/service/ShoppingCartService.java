@@ -1,9 +1,12 @@
 package com.example.progetto_ecommerce_java30.service;
 
+import com.example.progetto_ecommerce_java30.entity.OrderEntity;
 import com.example.progetto_ecommerce_java30.entity.ProductEntity;
 import com.example.progetto_ecommerce_java30.entity.ShoppingCartEntity;
 import com.example.progetto_ecommerce_java30.repository.ProductRepository;
 import com.example.progetto_ecommerce_java30.repository.ShoppingCartRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +41,14 @@ public class ShoppingCartService {
         return Optional.empty();
     }
 
+    @Transactional
     public void deleteShoppingCartById(Long id){
+        ShoppingCartEntity cart = shoppingCartRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cart non trovato"));
+
+        cart.getProducts().clear();
+        shoppingCartRepository.save(cart);
+
         shoppingCartRepository.deleteById(id);
     }
 
