@@ -14,14 +14,10 @@ public class ShoppingCartEntity {
     private Integer finalPrice;
     private LocalDate creationDate;
 
-    @ManyToMany(
-            fetch   = FetchType.LAZY,
-            cascade = { CascadeType.PERSIST, CascadeType.MERGE }
-    )
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="shopping_cart_products",
             joinColumns = @JoinColumn(name="shopping_cart_id"),
-            inverseJoinColumns = @JoinColumn(name="product_id")
-    )
+            inverseJoinColumns = @JoinColumn(name="product_id"))
     private List<ProductEntity> products;
 
     private ShoppingCartEntity() {}
