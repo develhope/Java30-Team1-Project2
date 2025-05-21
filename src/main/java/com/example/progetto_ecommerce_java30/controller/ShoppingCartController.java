@@ -51,11 +51,21 @@ public class ShoppingCartController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/add-product/{id}")
-    public ResponseEntity<ShoppingCartEntity> addProduct(@PathVariable Long id, @RequestBody ProductEntity product){
-        Optional<ShoppingCartEntity> addProductToCart = shoppingCartService.addProduct(id, product);
+    @PatchMapping("/add-product/{cartID}")
+    public ResponseEntity<ShoppingCartEntity> addProduct(@PathVariable Long cartID, @RequestParam Long productID){
+        Optional<ShoppingCartEntity> addProductToCart = shoppingCartService.addProduct(cartID, productID);
 
         return addProductToCart.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/remove-product/{cartID}")
+    public ResponseEntity<ShoppingCartEntity> removeProduct(@PathVariable Long cartID, @RequestParam Long productID){
+        Optional<ShoppingCartEntity> removeProductFromCart = shoppingCartService.removeProduct(cartID, productID);
+
+        if(removeProductFromCart.isPresent()){
+            return ResponseEntity.ok(removeProductFromCart.get());
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
