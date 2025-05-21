@@ -79,8 +79,8 @@ public class ShoppingCartEntity {
         this.products.add(addProd);
     }
 
-    public void removeProduct(ProductEntity removeProd){
-        this.products.remove(removeProd);
+    public void removeProduct(ProductEntity product){
+        this.products.remove(product);
     }
 
     public ShoppingCartStatus getShoppingCartStatus() {
