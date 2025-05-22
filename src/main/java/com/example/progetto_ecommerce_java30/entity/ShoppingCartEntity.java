@@ -1,6 +1,7 @@
 package com.example.progetto_ecommerce_java30.entity;
 
 import com.example.progetto_ecommerce_java30.entity.enumerated.ShoppingCartStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ public class ShoppingCartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameCart;
-    private Double finalPrice;
+    private Double finalPrice = 0.0;
     private LocalDate creationDate;
     @Enumerated
     private ShoppingCartStatus shoppingCartStatus = ShoppingCartStatus.OPENED;
@@ -29,7 +30,6 @@ public class ShoppingCartEntity {
                               List<ProductEntity> products, ShoppingCartStatus shoppingCartStatus) {
         this.id = id;
         this.nameCart = nameCart;
-        //this.finalPrice = finalPrice;
         this.creationDate = creationDate;
         this.products = products;
         this.shoppingCartStatus = shoppingCartStatus;
@@ -55,6 +55,7 @@ public class ShoppingCartEntity {
         return finalPrice;
     }
 
+    @JsonIgnore
     public void setFinalPrice(Double finalPrice) {
         this.finalPrice = finalPrice;
     }
@@ -78,17 +79,13 @@ public class ShoppingCartEntity {
     public void addProduct(ProductEntity addProd){
         this.products.add(addProd);
 
-        double v = addProd.getPrice() + finalPrice;
-
-        setFinalPrice(v);
+        this.finalPrice = addProd.getPrice() + finalPrice;
     }
 
     public void removeProduct(ProductEntity removeProd){
         this.products.remove(removeProd);
 
-        double v = finalPrice - removeProd.getPrice();
-
-        setFinalPrice(v);
+        this.finalPrice = finalPrice - removeProd.getPrice();
     }
 
     public ShoppingCartStatus getShoppingCartStatus() {
