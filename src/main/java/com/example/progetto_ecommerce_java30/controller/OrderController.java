@@ -56,4 +56,13 @@ public class OrderController {
         }
     }
 
+    @PatchMapping("/close-cart/{orderId}")
+    public ResponseEntity<OrderEntity> closeCartAfterOrder(@PathVariable Long orderId) {
+        Optional<OrderEntity> optionalOrder = orderService.payOrder(orderId);
+
+        return optionalOrder
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }

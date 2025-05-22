@@ -4,5 +4,6 @@ public enum OrderShippingEnum {
     DELIVERED,
     SHIPPED,
     PROGRESS,
-    DELIVERY
+    DELIVERY,
+    PAYED
 }
