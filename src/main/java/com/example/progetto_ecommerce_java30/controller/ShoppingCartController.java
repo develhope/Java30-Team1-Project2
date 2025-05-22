@@ -1,6 +1,5 @@
 package com.example.progetto_ecommerce_java30.controller;
 
-import com.example.progetto_ecommerce_java30.entity.ProductEntity;
 import com.example.progetto_ecommerce_java30.entity.ShoppingCartEntity;
 import com.example.progetto_ecommerce_java30.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +44,12 @@ public class ShoppingCartController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteShoppingCartById(@PathVariable Long id){
-        shoppingCartService.deleteShoppingCartById(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/clear-cart/{id}")
+    public ResponseEntity<ShoppingCartEntity> clearCart(@PathVariable Long id){
+        Optional<ShoppingCartEntity> clearCart = shoppingCartService.clearCart(id);
+
+        return clearCart.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PatchMapping("/add-product/{cartID}")

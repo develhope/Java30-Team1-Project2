@@ -1,6 +1,5 @@
 package com.example.progetto_ecommerce_java30.service;
 
-import com.example.progetto_ecommerce_java30.entity.OrderEntity;
 import com.example.progetto_ecommerce_java30.entity.ProductEntity;
 import com.example.progetto_ecommerce_java30.entity.ShoppingCartEntity;
 import com.example.progetto_ecommerce_java30.repository.ProductRepository;
@@ -41,15 +40,15 @@ public class ShoppingCartService {
         return Optional.empty();
     }
 
-    @Transactional
-    public void deleteShoppingCartById(Long id){
-        ShoppingCartEntity cart = shoppingCartRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cart non trovato"));
+    public Optional<ShoppingCartEntity> clearCart(Long id){
+        Optional<ShoppingCartEntity> cart = shoppingCartRepository.findById(id);
 
-        cart.getProducts().clear();
-        shoppingCartRepository.save(cart);
+        if (cart.isPresent()) {
+            cart.get().getProducts().clear();
+           return Optional.of(shoppingCartRepository.save(cart.get()));
+        }
 
-        shoppingCartRepository.deleteById(id);
+       return Optional.empty();
     }
 
     public Optional<ShoppingCartEntity> addProduct(Long cartID, Long productID) {
