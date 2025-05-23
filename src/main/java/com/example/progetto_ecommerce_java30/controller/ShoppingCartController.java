@@ -69,4 +69,18 @@ public class ShoppingCartController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @PatchMapping("/example/{cartID}")
+    public ResponseEntity<ShoppingCartEntity> add5Product(@PathVariable Long cartID){
+        Optional<ShoppingCartEntity> addProductToCart = shoppingCartService.add5Product(cartID, 4L);
+        Optional<ShoppingCartEntity> addProductToCart1 = shoppingCartService.add5Product(cartID, 5L);
+        Optional<ShoppingCartEntity> addProductToCart2 = shoppingCartService.add5Product(cartID, 8L);
+        Optional<ShoppingCartEntity> addProductToCart3 = shoppingCartService.add5Product(cartID, 13L);
+        Optional<ShoppingCartEntity> addProductToCart4 = shoppingCartService.add5Product(cartID, 35L);
+
+
+        return addProductToCart.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }

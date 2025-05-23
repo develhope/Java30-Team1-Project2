@@ -63,6 +63,18 @@ public class ShoppingCartService {
          return Optional.empty();
     }
 
+    public Optional<ShoppingCartEntity> add5Product(Long cartID, Long productID) {
+        Optional<ShoppingCartEntity> cartEntity = shoppingCartRepository.findById(cartID);
+        Optional<ProductEntity> productEntity = productRepository.findById(productID);
+
+        if (cartEntity.isPresent() && productEntity.isPresent()) {
+            cartEntity.get().addProduct(productEntity.get());
+            ShoppingCartEntity savedEntity = shoppingCartRepository.save(cartEntity.get());
+            return Optional.of(savedEntity);
+        }
+        return Optional.empty();
+    }
+
     public Optional<ShoppingCartEntity> removeProduct(Long cartID, Long productID){
         Optional<ShoppingCartEntity> cartEntity = shoppingCartRepository.findById(cartID);
         Optional<ProductEntity> productEntity = productRepository.findById(productID);
