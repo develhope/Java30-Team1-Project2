@@ -46,7 +46,7 @@ public class ProductPopulator {
             ProductCondition condition = ProductCondition.values()[random.nextInt(ProductCondition.values().length)];
 
             // Generazione di un prezzo compreso tra 10 e 1000, con due decimali
-            Double price = 10 + random.nextDouble() * 990;
+            double price = 10 + random.nextDouble() * 99;
 
             // Generazione di una data d'inserimento casuale negli ultimi 1000 giorni
             LocalDate insertDate = LocalDate.now().minusDays(random.nextInt(1000));
@@ -55,7 +55,7 @@ public class ProductPopulator {
             boolean isActive = random.nextBoolean();
 
             // Creazione del ProductEntity
-            ProductEntity product = new ProductEntity(name, description, category, condition, price, insertDate, isActive);
+            ProductEntity product = new ProductEntity(name, description, category, condition, BigDecimal.valueOf(price), insertDate, isActive);
 
             // Persistenza del prodotto; presupponiamo che il metodo addProduct di ProductService si occupi del salvataggio
             productService.addProduct(product);

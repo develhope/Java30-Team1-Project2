@@ -4,6 +4,7 @@ import com.example.progetto_ecommerce_java30.entity.enumerated.ShoppingCartStatu
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class ShoppingCartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameCart;
-    private Double finalPrice = 0.0;
+    private BigDecimal finalPrice = BigDecimal.valueOf(0.0);
     private LocalDate creationDate;
     @Enumerated
     private ShoppingCartStatus shoppingCartStatus = ShoppingCartStatus.OPENED;
@@ -51,14 +52,10 @@ public class ShoppingCartEntity {
         this.nameCart = nameCart;
     }
 
-    public Double getFinalPrice() {
+    public BigDecimal getFinalPrice() {
         return finalPrice;
     }
 
-    @JsonIgnore
-    public void setFinalPrice(Double finalPrice) {
-        this.finalPrice = finalPrice;
-    }
 
     public LocalDate getCreationDate() {
         return creationDate;
@@ -79,13 +76,13 @@ public class ShoppingCartEntity {
     public void addProduct(ProductEntity addProd){
         this.products.add(addProd);
 
-        this.finalPrice = addProd.getPrice() + finalPrice;
+        this.finalPrice =finalPrice.add(addProd.getPrice());
     }
 
     public void removeProduct(ProductEntity removeProd){
         this.products.remove(removeProd);
 
-        this.finalPrice = finalPrice - removeProd.getPrice();
+        this.finalPrice = finalPrice.subtract(removeProd.getPrice());
     }
 
     public ShoppingCartStatus getShoppingCartStatus() {

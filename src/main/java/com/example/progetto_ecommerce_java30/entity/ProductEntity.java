@@ -5,6 +5,7 @@ import com.example.progetto_ecommerce_java30.entity.enumerated.ProductCondition;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ProductEntity {
     @Enumerated(EnumType.STRING)
     private ProductCondition productCondition;
 
-    private Double price;
+    private BigDecimal price;
     private LocalDate insertDate;
 
     private boolean isActive = true;
@@ -32,7 +33,7 @@ public class ProductEntity {
     }
 
     public ProductEntity(String name, String description, ProductCategory category,
-                         ProductCondition condition, Double price, LocalDate insertDate,
+                         ProductCondition condition, BigDecimal price, LocalDate insertDate,
                          boolean isActive) {
         this.name = name;
         this.description = description;
@@ -83,11 +84,11 @@ public class ProductEntity {
         this.productCondition = productCondition;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
