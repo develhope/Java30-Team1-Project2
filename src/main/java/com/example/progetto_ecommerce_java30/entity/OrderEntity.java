@@ -1,6 +1,7 @@
 package com.example.progetto_ecommerce_java30.entity;
 
 import com.example.progetto_ecommerce_java30.entity.enumerated.OrderShippingEnum;
+import com.example.progetto_ecommerce_java30.entity.enumerated.PaymentStatusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -20,6 +21,12 @@ public class OrderEntity {
 
     @OneToOne
     private ShoppingCartEntity shoppingCart;
+
+    // --- nuovi campi per il pagamento ---
+    private String paymentIntentId;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatusEnum paymentStatus = PaymentStatusEnum.PENDING;
 
     private OrderEntity() {}
 
@@ -81,4 +88,21 @@ public class OrderEntity {
         this.shoppingCart = shoppingCart;
     }
 
+
+    public String getPaymentIntentId() {
+        return paymentIntentId;
+    }
+
+    public void setPaymentIntentId(String paymentIntentId) {
+        this.paymentIntentId = paymentIntentId;
+    }
+
+    // --- nuovi campi per il pagamento ---
+    public PaymentStatusEnum getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatusEnum paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
 }

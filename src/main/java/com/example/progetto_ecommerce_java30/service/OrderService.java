@@ -9,7 +9,9 @@ import com.example.progetto_ecommerce_java30.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -66,5 +68,22 @@ public class OrderService {
        return Optional.empty();
 
 
+    }
+
+    /**
+     * Nuovo metodo: mappa l'OrderEntity su una struttura
+     * con i soli campi che ti interessano per lo status.
+     */
+    public Optional<Map<String,Object>> getOrderStatus(Long id) {
+        return orderRepository.findById(id)
+                .map(order -> {
+                    Map<String, Object> result = new HashMap<>();
+                    result.put("orderId",       order.getId());
+                    result.put("orderNumber",   order.getOrderNumber());
+                    result.put("paymentStatus", order.getPaymentStatus());
+                    // puoi decidere di mettere una stringa vuota se è null, oppure tenerlo null
+                    result.put("paymentDate",   order.getPaymentDate());
+                    return result;
+                });
     }
 }
