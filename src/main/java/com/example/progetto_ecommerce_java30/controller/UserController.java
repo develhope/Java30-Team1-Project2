@@ -21,17 +21,17 @@ public class UserController {
     @Autowired
     private UserPopulator userPopulator;
 
-    @GetMapping
+    @GetMapping(path = "/select-all")
     public List<UserEntity> allUsers() {
         return userService.allUsers();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity newUser) {
         return ResponseEntity.ok(userService.addUser(newUser));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/select-by-id/{id}")
     public ResponseEntity<UserEntity> userById(@PathVariable Long id) {
         Optional<UserEntity> foundUser = userService.getUserById(id);
 
@@ -41,7 +41,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update-by-id/{id}")
     public ResponseEntity<UserEntity> updateUserById(@PathVariable Long id, @RequestBody UserEntity userToUpdate){
         Optional<UserEntity> userUpdated = userService.updateById(id, userToUpdate);
 
@@ -49,7 +49,7 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-by-id/{id}")
     //wildcard generica di Java, Il punto interrogativo rappresenta un tipo generico sconosciuto e accetta più tipi di oggetti.
     //la utilizzo per dare un body alla ResponseEntity (badRequest)
     public ResponseEntity<?> deleteUserById(@PathVariable Long id) {
