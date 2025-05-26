@@ -92,4 +92,8 @@ public class ShoppingCartEntity {
     public void setShoppingCartStatus(ShoppingCartStatus shoppingCartStatus) {
         this.shoppingCartStatus = shoppingCartStatus;
     }
+
+    public void resetPrice(){
+        this.finalPrice = BigDecimal.valueOf(0.0);
+    }
 }

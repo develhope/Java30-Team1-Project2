@@ -45,6 +45,7 @@ public class ShoppingCartService {
 
         if (cart.isPresent()) {
             cart.get().getProducts().clear();
+            cart.get().resetPrice();
            return Optional.of(shoppingCartRepository.save(cart.get()));
         }
 
