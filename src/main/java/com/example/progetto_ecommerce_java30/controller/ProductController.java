@@ -20,17 +20,17 @@ public class ProductController {
     @Autowired
     private ProductPopulator productPopulator;
 
-    @GetMapping
+    @GetMapping(path = "/select-all")
     public List<ProductEntity> allProducts() {
         return productService.getAllProducts();
     }
 
-    @PostMapping
+    @PostMapping("/add-product")
     public ResponseEntity<ProductEntity> addProduct(@RequestBody ProductEntity newProduct) {
         return ResponseEntity.ok(productService.addProduct(newProduct));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/select-by-id/{id}")
     public ResponseEntity<ProductEntity> productById(@PathVariable Long id) {
         Optional<ProductEntity> foundProduct = productService.productById(id);
 
@@ -40,7 +40,7 @@ public class ProductController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-by-id/{id}")
     public ResponseEntity<ProductEntity> deleteProductById(@PathVariable Long id) {
         Optional<ProductEntity> product = productService.deleteProductById(id);
 
@@ -55,7 +55,7 @@ public class ProductController {
         productPopulator.populate();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-by-id/{id}")
     public ResponseEntity<ProductEntity> updateProduct(@PathVariable Long id, @RequestBody ProductEntity product) {
         if (id < 0) {
             return ResponseEntity.badRequest().build();

@@ -17,17 +17,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping
+    @GetMapping(path = "/select-all")
     public List<OrderEntity> allOrder(){
         return orderService.allOrder();
     }
 
-    @PostMapping
+    @PostMapping(path = "/create")
     public ResponseEntity<OrderEntity> addOrder(@RequestBody OrderEntity newOrder){
         return ResponseEntity.ok(orderService.addOrder(newOrder));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/select-by-id/{id}")
     public ResponseEntity<OrderEntity> getOrderbyId(@PathVariable Long id){
         Optional<OrderEntity> foundOrder = orderService.getOrderById(id);
 
@@ -37,13 +37,13 @@ public class OrderController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-by-id/{id}")
     public ResponseEntity<Void> deleteShoppingCartById(@PathVariable Long id){
         orderService.deleteOrderById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update-by-id/{id}")
     public ResponseEntity<OrderEntity> updateOrder(@PathVariable Long id, @RequestBody OrderEntity order) {
         if (id < 0) {
             return ResponseEntity.badRequest().build();
@@ -57,7 +57,7 @@ public class OrderController {
         }
     }
 
-    @PatchMapping("/close-cart/{orderId}")
+    @PatchMapping("/close-cart-by-id/{orderId}")
     public ResponseEntity<OrderEntity> closeCartAfterOrder(@PathVariable Long orderId) {
         Optional<OrderEntity> optionalOrder = orderService.payOrder(orderId);
 

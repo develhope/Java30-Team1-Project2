@@ -16,17 +16,18 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
-    @GetMapping
+
+    @GetMapping(path = "/select-all")
     public List<ShoppingCartEntity> allShoppingCart(){
         return  shoppingCartService.getAllShoppingCart();
     }
 
-    @PostMapping
+    @PostMapping(path = "/create")
     public ResponseEntity<ShoppingCartEntity> addShoppingCart(@RequestBody ShoppingCartEntity newShoppingCart){
         return ResponseEntity.ok(shoppingCartService.addShoppingCart(newShoppingCart));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/select-by-id/{id}")
     public ResponseEntity<ShoppingCartEntity> shoppingCartById(@PathVariable Long id){
         Optional<ShoppingCartEntity> foundShoppingCart = shoppingCartService.shoppingCartById(id);
 
@@ -36,7 +37,7 @@ public class ShoppingCartController {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update-by-id/{id}")
     public ResponseEntity<ShoppingCartEntity> updateCartById(@PathVariable Long id, @RequestBody ShoppingCartEntity cartToUpdate){
         Optional<ShoppingCartEntity> updatedCart = shoppingCartService.updateCartById(id, cartToUpdate);
 
@@ -44,7 +45,7 @@ public class ShoppingCartController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/clear-cart/{id}")
+    @DeleteMapping("/clear-cart-by-id/{id}")
     public ResponseEntity<ShoppingCartEntity> clearCart(@PathVariable Long id){
         Optional<ShoppingCartEntity> clearCart = shoppingCartService.clearCart(id);
 
@@ -52,7 +53,7 @@ public class ShoppingCartController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/add-product/{cartID}")
+    @PatchMapping("/add-product-on-cartid/{cartID}")
     public ResponseEntity<ShoppingCartEntity> addProduct(@PathVariable Long cartID, @RequestParam Long productID){
         Optional<ShoppingCartEntity> addProductToCart = shoppingCartService.addProduct(cartID, productID);
 
@@ -60,7 +61,7 @@ public class ShoppingCartController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/remove-product/{cartID}")
+    @PatchMapping("/remove-product-from-cartid/{cartID}")
     public ResponseEntity<ShoppingCartEntity> removeProduct(@PathVariable Long cartID, @RequestParam Long productID){
         Optional<ShoppingCartEntity> removeProductFromCart = shoppingCartService.removeProduct(cartID, productID);
 
