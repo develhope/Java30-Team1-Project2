@@ -88,7 +88,7 @@ public class OrderEntity {
         this.shoppingCart = shoppingCart;
     }
 
-
+    // --- nuovi campi per il pagamento ---
     public String getPaymentIntentId() {
         return paymentIntentId;
     }
@@ -97,7 +97,6 @@ public class OrderEntity {
         this.paymentIntentId = paymentIntentId;
     }
 
-    // --- nuovi campi per il pagamento ---
     public PaymentStatusEnum getPaymentStatus() {
         return paymentStatus;
     }
@@ -105,4 +104,5 @@ public class OrderEntity {
     public void setPaymentStatus(PaymentStatusEnum paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
+
 }

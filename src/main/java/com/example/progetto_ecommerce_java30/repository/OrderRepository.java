@@ -5,10 +5,9 @@ import com.example.progetto_ecommerce_java30.entity.enumerated.PaymentStatusEnum
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
+
     List<OrderEntity> findByPaymentStatus(PaymentStatusEnum status);
 
-    Optional<OrderEntity> findByPaymentIntentId(String intentId);
 }

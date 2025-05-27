@@ -5,7 +5,6 @@ import com.example.progetto_ecommerce_java30.PaymentSystem.dto.PaymentRequest;
 import com.example.progetto_ecommerce_java30.entity.OrderEntity;
 import com.example.progetto_ecommerce_java30.entity.enumerated.PaymentStatusEnum;
 import com.example.progetto_ecommerce_java30.repository.OrderRepository;
-import com.example.progetto_ecommerce_java30.service.OrderService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +24,6 @@ public class PaymentController {
 
     @Autowired
     private OrderRepository orderRepository;
-
-//    @PostMapping
-//    public ResponseEntity<Map<String,Object>> pay(@RequestBody PaymentRequest req) throws StripeException {
-//        PaymentIntent pi = paymentService.createPayment(req.getAmount(), req.getCurrency());
-//        return ResponseEntity.ok(Map.of(
-//                "clientSecret", pi.getClientSecret()
-//        ));
-//    }
-
     // 1) crei il PaymentIntent
     @PostMapping("/create")
     public ResponseEntity<Map<String,Object>> create(@RequestBody PaymentRequest req) throws StripeException {
