@@ -14,7 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.http.HttpMethod;
 @EnableWebSecurity
 public class SecurityConfig {
 
