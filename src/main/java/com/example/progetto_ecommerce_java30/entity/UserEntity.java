@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity(name = "user")
 public class UserEntity {
@@ -27,6 +29,10 @@ public class UserEntity {
     @OneToMany
     @JoinColumn(name = "shopping_order_id")
     private List<OrderEntity> orders;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<ReviewEntity> reviews = new ArrayList<>();
 
     private UserEntity() {
     }
@@ -111,5 +117,13 @@ public class UserEntity {
 
     public void removeOrders(OrderEntity order) {
         this.orders.remove(order);
+    }
+
+    public List<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewEntity> reviews) {
+        this.reviews = reviews;
     }
 }

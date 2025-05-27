@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "product")
@@ -28,6 +29,10 @@ public class ProductEntity {
     private LocalDate insertDate;
 
     private boolean isActive = true;
+
+ @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+ @JsonIgnore // Avoid infinite recursion in JSON serialization
+ private List<ReviewEntity> reviews = new ArrayList<>();
 
     private ProductEntity() {
     }
@@ -106,5 +111,13 @@ public class ProductEntity {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+ public List<ReviewEntity> getReviews() {
+ return reviews;
+    }
+
+ public void setReviews(List<ReviewEntity> reviews) {
+ this.reviews = reviews;
     }
 }
