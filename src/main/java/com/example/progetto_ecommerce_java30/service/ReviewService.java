@@ -26,6 +26,6 @@ public class ReviewService {
     }
 
     public List<ReviewEntity> getReviewsByUser(Long userId) {
-        return reviewRepository.findByUserId(userId);
+ return reviewRepository.findByUserId(userId);
     }
 }
