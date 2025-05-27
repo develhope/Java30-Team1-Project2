@@ -45,24 +45,6 @@ public class PaymentService {
     }
 
     /**
-     * Crea un paymentMethod di test (carta 4242…) e ne ritorna l'ID.
-     * Utile per eseguire il confirm senza frontend.
-     */
-    public String createTestCardPaymentMethod() throws StripeException {
-        Map<String,Object> card = Map.of(
-                "number", "4242424242424242",
-                "exp_month", 12,
-                "exp_year", 2025,
-                "cvc", "123"
-        );
-        Map<String,Object> params = Map.of(
-                "type", "card",
-                "card", card
-        );
-        return PaymentMethod.create(params).getId();
-    }
-
-    /**
      * Conferma server-side il tuo PaymentIntent usando un paymentMethodId.
      */
     public PaymentIntent confirmPayment(String intentId, String paymentMethodId) throws StripeException {
