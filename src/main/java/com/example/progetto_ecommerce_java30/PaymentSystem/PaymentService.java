@@ -15,7 +15,8 @@ import java.util.Map;
 
 @Service
 public class PaymentService {
-    @Value("${stripe.apiKey}") private String apiKey;
+    @Value("${stripe.api.key}")
+    private String apiKey;
 
     @PostConstruct
     public void init() {

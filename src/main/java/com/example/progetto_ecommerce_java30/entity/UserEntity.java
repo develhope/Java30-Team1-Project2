@@ -13,8 +13,14 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //campo necessario per auth di Stripe
+    @Column(name = "stripe_customer_id")
+    private String stripeCustomerId;
+
     private String name;
     private String surname;
+
+    private String password;
 
     @Email
     private String email;
@@ -28,13 +34,14 @@ public class UserEntity {
     @JoinColumn(name = "shopping_order_id")
     private List<OrderEntity> orders;
 
-    private UserEntity() {
+    public UserEntity() {
     }
 
-    public UserEntity(String name, String surname, String email, LocalDate birthDate, LocalDate registrationDate, boolean isActive, List<OrderEntity> orders) {
+    public UserEntity(String name, String surname, String email, String password, LocalDate birthDate, LocalDate registrationDate, boolean isActive, List<OrderEntity> orders) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.password = password;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
         this.isActive = isActive;
@@ -111,5 +118,21 @@ public class UserEntity {
 
     public void removeOrders(OrderEntity order) {
         this.orders.remove(order);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getStripeCustomerId() {
+        return stripeCustomerId;
+    }
+
+    public void setStripeCustomerId(String stripeCustomerId) {
+        this.stripeCustomerId = stripeCustomerId;
     }
 }
