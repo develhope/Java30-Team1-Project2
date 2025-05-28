@@ -40,12 +40,13 @@ public class OrderService {
     }
 
     public Optional<OrderEntity> updateOrder(Long id, OrderEntity order){
-        if(!orderRepository.existsById(id)){
-            return Optional.empty();
-        }
+        Optional<OrderEntity> orderFound = orderRepository.findById(id);
 
-        order.setId(id);
-        return Optional.of(orderRepository.save(order));
+        if(orderFound.isPresent()){
+            order.setId(id);
+            return Optional.of(orderRepository.save(order));
+        }
+        return Optional.empty();
     }
 
     public Optional<OrderEntity> payOrder(Long orderId) {
