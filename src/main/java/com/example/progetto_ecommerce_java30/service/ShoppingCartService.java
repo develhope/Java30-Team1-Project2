@@ -33,7 +33,9 @@ public class ShoppingCartService {
     }
 
     public Optional<ShoppingCartEntity> updateCartById(Long id, ShoppingCartEntity cartToUpdate){
-        if(shoppingCartRepository.existsById(id)){
+        Optional<ShoppingCartEntity> cartFound = shoppingCartRepository.findById(id);
+
+        if(cartFound.isPresent()){
             cartToUpdate.setId(id);
             return Optional.of(shoppingCartRepository.save(cartToUpdate));
         }

@@ -5,6 +5,7 @@ import com.example.progetto_ecommerce_java30.repository.UserRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value; // Import per @Value
 import org.springframework.security.crypto.password.PasswordEncoder; // Import per PasswordEncoder
@@ -54,36 +55,41 @@ public class UserService {
     }
 
     public Optional<UserEntity> getUserById(Long id){
-        return userRepository.findById(id);
+        Optional<UserEntity> userFound = userRepository.findById(id);
+
+        if(userFound.isPresent()){
+            return userFound;
+        }
+
+        return Optional.empty();
     }
 
     public Optional<UserEntity> updateById(Long id, UserEntity userToUpdate){
-        if(userRepository.existsById(id)){
-            // Recupera l'utente esistente per non sovrascrivere campi importanti come password/stripeCustomerId
-            //TODO fare il check di questa findById (isPresent)
-            UserEntity existingUser = userRepository.findById(id).get();
+        // Recupera l'utente esistente per non sovrascrivere campi importanti come password/stripeCustomerId
+        Optional<UserEntity> userFound = userRepository.findById(id);
 
+        if(userFound.isPresent()){
             // Aggiorna solo i campi consentiti (es. name, surname, email se necessario)
-            existingUser.setName(userToUpdate.getName());
-            existingUser.setSurname(userToUpdate.getSurname());
-            existingUser.setEmail(userToUpdate.getEmail());
+            userFound.get().setName(userToUpdate.getName());
+            userFound.get().setSurname(userToUpdate.getSurname());
+            userFound.get().setEmail(userToUpdate.getEmail());
             // TODO: Se la password deve essere aggiornata, dovrebbe esserci un endpoint separato con ricodifica
             // existingUser.setPassword(passwordEncoder.encode(userToUpdate.getPassword()));
-            existingUser.setBirthDate(userToUpdate.getBirthDate());
-            existingUser.setActive(userToUpdate.isActive());
+            userFound.get().setBirthDate(userToUpdate.getBirthDate());
+            userFound.get().setActive(userToUpdate.isActive());
 
-            return Optional.of(userRepository.save(existingUser));
+            return Optional.of(userRepository.save(userFound.get()));
         }
         return Optional.empty();
     }
 
     public Optional<UserEntity> deleteUserById(Long id){
-        if(userRepository.existsById(id)){
-            UserEntity userToDeactivate = userRepository.findById(id).get();
+        Optional<UserEntity> userFound = userRepository.findById(id);
 
-            userToDeactivate.setActive(false);
+        if(userFound.isPresent()){
+            userFound.get().setActive(false);
 
-            return Optional.of(userRepository.save(userToDeactivate));
+            return Optional.of(userRepository.save(userFound.get()));
         }
 
         return Optional.empty();
