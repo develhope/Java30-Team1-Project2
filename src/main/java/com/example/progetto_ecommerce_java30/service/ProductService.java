@@ -26,22 +26,25 @@ public class ProductService {
     }
 
     public Optional<ProductEntity> deleteProductById(Long id) {
-        if (productRepository.existsById(id)) {
-            ProductEntity product = productRepository.findById(id).get();
-            product.setActive(false);
+        Optional<ProductEntity> productFound = productRepository.findById(id);
 
-            return Optional.of(productRepository.save(product));
+        if (productFound.isPresent()) {
+            productFound.get().setActive(false);
+
+            return Optional.of(productRepository.save(productFound.get()));
         }
 
         return Optional.empty();
     }
 
     public Optional<ProductEntity> updateProduct(Long id, ProductEntity product){
-        if(!productRepository.existsById(id)){
-            return Optional.empty();
+        Optional<ProductEntity> productFound = productRepository.findById(id);
+
+        if(productFound.isPresent()){
+            product.setId(id);
+            return Optional.of(productRepository.save(product));
         }
 
-        product.setId(id);
-        return Optional.of(productRepository.save(product));
+        return Optional.empty();
     }
 }
