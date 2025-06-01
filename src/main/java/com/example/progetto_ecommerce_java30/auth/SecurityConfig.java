@@ -33,8 +33,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disabilita CSRF per API stateless
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() // Permetti la registrazione
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()// Permetti il login
+                        .requestMatchers("/auth/**").permitAll() // Permetti tutto ciò che c'è dopo auth
+                        .requestMatchers("/user/**", "/product/**", "/shopping-cart/**", "/order/**").permitAll()
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
